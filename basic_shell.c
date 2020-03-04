@@ -429,26 +429,6 @@ int main()
 							}
 					} //end switch check
 				} //end all other commands
-
-				// //check background PIDs
-				// int child_exit_method;
-				// //-1 to wait for any child process
-				// while ((child_pid = waitpid(-1, &child_exit_method, WNOHANG)) > 0)
-				// {
-				// 	printf("background pid %d is done: ", child_pid);
-				// 	fflush(stdout);
-				// 	if (WIFEXITED(child_exit_method) != 0)
-				// 	{
-				// 		printf("exit value %d\n", WEXITSTATUS(child_exit_method));
-				// 		fflush(stdout);
-				// 	}
-				// 	else if (WIFSIGNALED(child_exit_method))
-				// 	{
-				// 		printf("terminated by signal %d\n", WTERMSIG(child_exit_method));
-				// 		fflush(stdout);
-				// 	}
-				// }
-
 			}//end argument array iteration
 		}//end array building
 	}//end input parsing
