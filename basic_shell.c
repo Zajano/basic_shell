@@ -1,23 +1,15 @@
 /*******************************************************************************
-** Program:		smallsh
+** Program:	basic_shell
 ** Author:      Zachary Jaffe-Notier
 ** Date:        Feb 24, 2020
 ** Description: simple shell with 3 built-in commands: exit, cd, and status
-** Sources:
-** 1. fgets		https://stackoverflow.com/questions/46146240
-**				/why-does-alarm-cause-fgets-to-stop-waiting
-** 2. pid str	https://stackoverflow.com/questions/15262315
-**				/how-to-convert-pid-t-to-string
-** 3. dev/null	https://stackoverflow.com/questions/14846768
-**				/in-c-how-do-i-redirect-stdout-fileno-to-dev-null-using-dup2-and-then-redirect
-** 4. more, but lost track...
 *******************************************************************************/
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <errno.h>		//errno for checking input
-#include <fcntl.h>		//file control
+#include <errno.h>	//errno for checking input
+#include <fcntl.h>	//file control
 #include <signal.h>     //sigactions
 #include <unistd.h>     //exec
 #include <sys/stat.h>   //stat
@@ -25,17 +17,17 @@
 #include <sys/wait.h>   //waitpid
 
 //globals
-int exit_stat = 0;		// exit smallsh on 1
-int fg_mode = 0; 		// foreground-only mode == 1
-int bg_process = 0;		// if 1, meant to be background process
+int exit_stat = 0;	// exit smallsh on 1
+int fg_mode = 0; 	// foreground-only mode == 1
+int bg_process = 0;	// if 1, meant to be background process
 char user_input[2049];	// max chars + enter
 char* user_args[512];	// array of arguments
 char input_file[255];	// file name for redirect
 char output_file[255];
 int status_code = -5;	// track exit status of processess
 //int num_procs = 0;	// number of processess
-int in_red = 0; 		// 1 = input redirect
-int out_red = 0;		// 1 = output redirect
+int in_red = 0; 	// 1 = input redirect
+int out_red = 0;	// 1 = output redirect
 
 //checks whether to enter or exit foreground-only mode
 void check_SIGTSTP()
