@@ -1,6 +1,6 @@
 compile by entering
 
-gcc -o smallsh smallsh.c
+gcc -o basic_shell basic_shell.c
 
-into the command line while in the directory of smallsh.c
+into the command line
 
